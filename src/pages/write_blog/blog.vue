@@ -37,12 +37,18 @@
         
       </v-btn>
     </v-app-bar>
+  <HelloWorld msg="Welcome to Your Vue.js App"/>
   </v-app>
 </template>
 
 <script>
-export default {
+import HelloWorld from '../../components/HelloWorld.vue'
 
+export default {
+  name: 'write_blog',
+  components: {
+    HelloWorld
+  }
 }
 </script>
 

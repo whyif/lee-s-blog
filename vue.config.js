@@ -1,18 +1,17 @@
 module.exports = {
   pages: {
-    blog: {
-      entry: 'src/blog/main.js',
-      template: 'public/blog.html',
-      filename: 'blog.html',
-      title: 'blog Page',
+    write_blog: {
+      entry: 'src/pages/write_blog/main.js',
+      template: 'public/write_blog.html',
+      filename: 'write_blog.html',
+      title: 'write blog',
       
     },
     index: {
-      entry: 'src/index/main.js',
+      entry: 'src/pages/index/main.js',
       template: 'public/index.html',
       filename: 'index.html',
       title: 'Index Page',
-      
     },
  //subpage: 'src/subpage/main.js'
   }
