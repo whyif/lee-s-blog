@@ -38,12 +38,10 @@
 
     <v-navigation-drawer app v-model="drawer" temporary>
       <v-list>
-        <v-container style="padding: 27px">
-          <v-row>
-            <v-avatar size="72" color="primary"></v-avatar>
-            <v-card-text>welcome back</v-card-text>
-          </v-row>
-        </v-container>
+        <v-layout row wrap justify-center>
+          <v-avatar size="92" color="primary" class="ma-3"></v-avatar>
+        </v-layout>
+          <v-card-text class="text-align:center">welcome back</v-card-text>
         <v-divider></v-divider>
 
         <v-list-item-group>
@@ -76,6 +74,7 @@ export default {
       { text: "home", icon: "mdi-home",src:url },
       { text: "real time", icon: "mdi-clock",src:'' },
       { text: "account", icon: "mdi-account" ,src:url+'/account'},
+      {text:'tags',icon:'mdi-tag',src:''}
     ],
     dialog: false,
     dialog_text: [
