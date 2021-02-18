@@ -14,6 +14,7 @@
       <v-toolbar-title style="font-size: 50px">lee's blog</v-toolbar-title>
 
       <v-spacer></v-spacer>
+      <!-- <a href="localhost:8080/blog">点我写博客</a> -->
       <div style="padding-top: 50px">
         <a href="http://github.com" style="text-decoration: none">
           <v-icon style="padding: 10px">mdi-github</v-icon>
