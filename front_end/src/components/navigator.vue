@@ -14,7 +14,6 @@
       <v-toolbar-title style="font-size: 50px">lee's blog</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <!-- <a href="localhost:8080/blog">点我写博客</a> -->
       <div style="padding-top: 50px">
         <a href="http://github.com" style="text-decoration: none">
           <v-icon style="padding: 10px">mdi-github</v-icon>
@@ -39,9 +38,11 @@
     <v-navigation-drawer app v-model="drawer" temporary>
       <v-list>
         <v-layout row wrap justify-center>
-          <v-avatar size="92" color="primary" class="ma-3"></v-avatar>
+          <v-avatar size="92" color="primary" class="ma-3">
+            <img src="http://localhost:8080/img/protrait.jpg">
+          </v-avatar>
         </v-layout>
-          <v-card-text class="text-align:center">welcome back</v-card-text>
+          <v-card-text class="text-align:center">瞧见没,那就是大佬</v-card-text>
         <v-divider></v-divider>
 
         <v-list-item-group>

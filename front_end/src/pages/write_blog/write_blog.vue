@@ -3,8 +3,8 @@
     <Navigator />
     <v-main>
       <v-container>
-        <v-form ref="form">
-          <v-text-field name="theme" label="主题" required></v-text-field>
+        <form id='blog' action="http://localhost:8080/newblog" method="POST">
+          <v-text-field name="title" label="主题" required></v-text-field>
           <v-textarea
             name="blogtext"
             auto-grow
@@ -21,6 +21,7 @@
           ></v-file-input>
           <v-row class="my-5">
             <v-combobox
+              name="tags"
               chips
               clearable
               label="在？加个标签？"
@@ -33,7 +34,7 @@
             <v-spacer></v-spacer>
             <v-btn color="success" @click="submit">SUBMIT</v-btn>
           </v-row>
-        </v-form>
+        </form>
       </v-container>
     </v-main>
   </v-app>
@@ -50,7 +51,7 @@ export default {
   },
   methods: {
     submit: function () {
-      this.$refs.form.submit();
+      document.getElementById('blog').submit()
     },
   },
 };
