@@ -23,7 +23,7 @@
           {{ next_blog.name }}
         </p>
       </a>
-
+      
       <v-container>
         <v-row justify="center">
           <v-col cols="12">
@@ -31,7 +31,7 @@
               <v-row justify="center">
                 <v-col cols="10">
                   <v-img
-                    :src="img_src"
+                    :src="thisblog.img_src"
                     style="object-fit: cover; height: 450px"
                     class="ma-2"
                   ></v-img>
@@ -40,18 +40,18 @@
               <v-row justify="space-between">
                 
                   <v-card-title style="font-size:30px;" class="ml-5">
-                    {{ title }}
+                    {{ thisblog.title }}
                   </v-card-title>
                 <div class="mr-7 mt-2">  
                   <v-icon>mdi-tag</v-icon>
                   <span>tags:</span>
-                  <v-chip v-for="(tag, i) in tags" :key="i" class="ml-2">{{
+                  <v-chip v-for="(tag, i) in thisblog.tags" :key="i" class="ml-2">{{
                     tag.text
                   }}</v-chip>
                 </div>
               </v-row>
               <v-divider></v-divider>
-              <v-card-text class="body-1">{{ content }}</v-card-text>
+              <v-card-text class="body-1">{{ thisblog.blogtext }}</v-card-text>
             </v-card>
           </v-col>
         </v-row>
@@ -59,16 +59,19 @@
     </v-main>
   </v-app>
 </template>
-
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
 import Navigator from "../../components/navigator.vue";
+
 export default {
   el: "#last_next",
   data: () => ({
-    title: "芜湖！happy new year!",
-    content: "我是正文内容",
-    tags: [{ text: "学习" }, { text: "生活" },{text:'游戏'}],
-    img_src: "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
+    thisblog:{    
+      title: "芜湖！happy new year!",
+      blogtext: "我是正文内容",
+      tags: [{ text: "学习" }, { text: "生活" },{text:'游戏'}],
+      img_src: "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
+    },
     last_blog: {
       name: "last blog name",
       href: "http://localhost/write_blog",
@@ -81,6 +84,15 @@ export default {
   components: {
     Navigator,
   },
+  mounted(){
+    this.$http.get('http://localhost:8080/blog/6030d117a5b7edd4b0459bed').then((response)=>{
+      console.log(response.data)
+      this.thisblog=response.data
+    })
+  },
+//问题确定，即后端通过怎样的方法吧数据给前端
+
+
 };
 </script>
 

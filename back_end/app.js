@@ -7,8 +7,13 @@ const dbname="blog"
 var client =new MongoClient(mongo_url,{useNewUrlParser: true,useUnifiedTopology: true})
 var ObjectId = require('mongodb').ObjectId
 
-
 const app=express()
+
+var cors = require('cors');
+const { RSA_NO_PADDING } = require('constants');
+app.use(cors())  //允许跨域资源访问
+
+
 
 app.use(bodyParser.urlencoded({extended:true}))
 
@@ -22,10 +27,16 @@ client.connect().then(()=>{
 
     app.get('/blog/:blogid',(req,res)=>{
         console.log(req.params.blogid)
-        user.findOne({_id:ObjectId(req.params.blogid)}).then((result)=>{
+        blogs.findOne({_id:ObjectId(req.params.blogid)}).then((result)=>{
             console.log(result)
-            res.send(result)
+            res.json(result)
         })
+    })
+    
+    app.get('/test',(req,res)=>{
+        // res.json({text:"test success"})
+        res.send({text:'test success'})
+        console.log('test success')
     })
 
     app.post('/newblog',(req,res)=>{        
@@ -75,14 +86,6 @@ client.connect().then(()=>{
             else{res.send('发布成功')}
         })
 
-        // blogs.insertOne({
-        //     title:'new blog test',
-        //     content:"new blog test content",
-        //     tags:[
-        //         {text:'tag1'},{text:'tag2'},{text:'tag3'},
-        //     ],
-        //     img_src:'',
-        // })
     })
 })
 
