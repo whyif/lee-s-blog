@@ -25,6 +25,15 @@ client.connect().then(()=>{
     const blogs=db.collection('blogs')
     const user =db.collection('user')
 
+    app.get('/',(req,res)=>{
+        console.log('home page required')
+        blogs.find({}).toArray(function(err,result){
+            console.log(result)
+            res.json(result)
+        })
+    })
+
+
     app.get('/blog/:blogid',(req,res)=>{
         console.log(req.params.blogid)
         blogs.findOne({_id:ObjectId(req.params.blogid)}).then((result)=>{

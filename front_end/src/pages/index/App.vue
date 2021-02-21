@@ -18,7 +18,7 @@
               <v-card-title style="font-size: 27px">{{
                 item.title
               }}</v-card-title>
-              <v-card-text>{{ item.text }}</v-card-text>
+              <v-card-text>{{ item.blogtext }}</v-card-text>
               <v-divider></v-divider>
               <v-container>
                 <v-chip
@@ -28,7 +28,7 @@
                   >{{ tag.text }}</v-chip
                 >
               </v-container>
-              <v-btn text color="deep-purple accent-4" class="my-10"  href='http://localhost/blog'
+              <v-btn text color="deep-purple accent-4" class="my-10"  :href='item.src'
                 >Learn More</v-btn
               >
             </v-card>
@@ -44,49 +44,25 @@
 
 
 import Navigator from '../../components/navigator.vue'
+// var url='http://localhost:8081/blog/'
+var url='http://localhost/blog/?blogid='
 export default {
+  mounted(){
+    this.$http.get('http://localhost:8080/').then((response)=>{
+      console.log(response.data)
+      this.cards=response.data
+      for(let i=0;i<response.data.length;i++){
+        this.cards[i].src=url+response.data[i]._id
+      }
+      
+    })
+  },
   components: {
     Navigator,
   },
   data: () => ({
     cards: [
-      {
-        title: "title1",
-        text: "我是简短的介绍",
-        tags: [
-          { text: "标签1" },
-          { text: "标签2" },
-          { text: "标签3" },
-          { text: "标签4" },
-        ],
-        img_src: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
-        src: "",
-      },
-      {
-        title: "title2",
-        text: "我是简短的介绍",
-        tags: [
-          { text: "标签1" },
-          { text: "标签2" },
-          { text: "标签3" },
-          { text: "标签4" },
-        ],
-        img_src:
-          "https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg",
-        src: "",
-      },
-      {
-        title: "title3",
-        text: "我是简短的介绍",
-        tags: [
-          { text: "标签1" },
-          { text: "标签2" },
-          { text: "标签3" },
-          { text: "标签4" },
-        ],
-        img_src: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-        src: "",
-      },
+
     ],
   }),
 };
