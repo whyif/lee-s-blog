@@ -45,9 +45,11 @@
                 <div class="mr-7 mt-2">  
                   <v-icon>mdi-tag</v-icon>
                   <span>tags:</span>
-                  <v-chip v-for="(tag, i) in thisblog.tags" :key="i" class="ml-2">{{
+                  <span  v-for="(tag, i) in thisblog.tags" :key="i">
+                  <v-chip class="ml-2" v-if="tag.text.length!=0">{{
                     tag.text
                   }}</v-chip>
+                  </span>
                 </div>
               </v-row>
               <v-divider></v-divider>

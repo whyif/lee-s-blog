@@ -21,12 +21,13 @@
               <v-card-text>{{ item.blogtext }}</v-card-text>
               <v-divider></v-divider>
               <v-container>
+                <span v-for="tag in item.tags" :key="tag.text">
                 <v-chip
-                  v-for="tag in item.tags"
-                  :key="tag.text"
+                  v-if="tag.text.length!=0"
                   style="margin: 5px"
                   >{{ tag.text }}</v-chip
                 >
+                </span>
               </v-container>
               <v-btn text color="deep-purple accent-4" class="my-10"  :href='item.src'
                 >Learn More</v-btn

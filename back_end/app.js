@@ -1,5 +1,20 @@
 const express=require('express')
 const bodyParser=require('body-parser')
+const multer=require('multer')
+
+
+
+var storage=multer.diskStorage({
+    destination:function(req,file,cb){
+        cb(null,'./public/img')
+    },
+    filename:function(req,file,cb){
+        cb(null,file.originalname)
+        //暂时使用了文件原名以保留扩展名，后续需要改动
+    },
+})
+
+const upload=multer({storage:storage})
 
 const MongoClient =require('mongodb').MongoClient
 const mongo_url='mongodb://localhost:27017';
@@ -10,7 +25,6 @@ var ObjectId = require('mongodb').ObjectId
 const app=express()
 
 var cors = require('cors');
-const { RSA_NO_PADDING } = require('constants');
 app.use(cors())  //允许跨域资源访问
 
 
@@ -42,10 +56,15 @@ client.connect().then(()=>{
         })
     })
     
-    app.get('/test',(req,res)=>{
-        // res.json({text:"test success"})
-        res.send({text:'test success'})
+    app.use('/test',(req,res)=>{
+        res.send('test success')  
+        console.log(req.body)
         console.log('test success')
+    })
+
+    app.post('/img',upload.single('name'),(req,res)=>{
+        console.log(req.file)
+        res.send('success')
     })
 
     app.post('/newblog',(req,res)=>{        
