@@ -4,7 +4,7 @@
     <v-main>
       <v-container>
         <form id="blog" action="http://localhost:8080/newblog" method="POST">
-          <v-text-field name="title" label="主题" required></v-text-field>
+          <v-text-field v-model="title" name="title" label="主题" required></v-text-field>
           <v-textarea
             name="blogtext"
             auto-grow
@@ -49,6 +49,7 @@ import axios from "axios";
 export default {
   data: () => ({
     tags: ["学习", "生活", "游戏", "时事", "杂项"],
+    title:"",
   }),
   components: {
     Navigator,
@@ -59,14 +60,18 @@ export default {
       //这里可以尝试加一个图片预览功能
     },
     submitblog() {
+      console.log(this.title)
+      document.getElementById("blog").submit();
+
       console.log(this.files);
       var formdata = new FormData();
-      formdata.append("name", this.files);
+      formdata.append("img", this.files);
+      formdata.append('name',this.files.name)
+      formdata.append('title',this.title)
       axios
         .post("http://localhost:8080/img", formdata)
         .then(function (response) {
-          console.log(response);
-          document.getElementById("blog").submit();
+         console.log(response);
         });
     },
   },

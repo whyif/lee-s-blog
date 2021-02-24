@@ -62,8 +62,13 @@ client.connect().then(()=>{
         console.log('test success')
     })
 
-    app.post('/img',upload.single('name'),(req,res)=>{
-        console.log(req.file)
+    app.post('/img',upload.single('img'),(req,res)=>{
+        console.log(req.body)
+        var title=req.body.title
+        var name=req.body.name
+        var src='http://localhost:8080/img/'+name
+        console.log(src)
+        blogs.updateOne({title:title},{$set:{img_src:src}})
         res.send('success')
     })
 
